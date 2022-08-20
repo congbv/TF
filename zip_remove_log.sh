@@ -17,10 +17,11 @@ NumberColumeConfig=3
 configLogs="""
 
 path|zip after days|remove after days
-/home/ubuntu/logs|30|200
-/home/ubuntu/logKafka|30|50
+/home/ubuntu/logs|30|700
+/home/ubuntu/logKafka|30|700
 
-/home/ubuntu/logKafka|30
+
+
 """
 
 EOF
@@ -67,11 +68,11 @@ for cf in $configLogs
         strGrep=`getDayDelete $delnum`
         ls|grep "$strGrep"|while read line
           do
+            if [ -f $logpath/$line ]; then
             rm -f $line
+            fi
           done
       fi
-    else 
-      echo "$cf is config NOK"
     fi
   done
 
